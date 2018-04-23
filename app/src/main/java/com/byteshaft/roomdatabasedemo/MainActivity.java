@@ -1,5 +1,6 @@
 package com.byteshaft.roomdatabasedemo;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,14 +12,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "Main";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private ArrayList<User> arrayList;
+//    private ArrayList<User> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +27,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        arrayList = new ArrayList<>();
+//        arrayList = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
-            User user = new User("Shahid # " + i, "Ghafoor", "shahidghafoor00@gmail.com");
-            arrayList.add(user);
-        }
+//        for (int i = 0; i < 10; i++) {
+//            User user = new User("Shahid # " + i, "Ghafoor", "shahidghafoor00@gmail.com");
+//            arrayList.add(user);
+//        }
+
+        AppDatabase database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "production")
+                .allowMainThreadQueries()
+                .build();
+        List<User> users = database.userDao().getAllUsers();
 
         recyclerView = findViewById(R.id.recycler_view);
         FloatingActionButton fab = findViewById(R.id.fab);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapter = new UserAdapter(arrayList);
+        adapter = new UserAdapter(users);
         recyclerView.setAdapter(adapter);
 
         fab.setOnClickListener(new View.OnClickListener() {
