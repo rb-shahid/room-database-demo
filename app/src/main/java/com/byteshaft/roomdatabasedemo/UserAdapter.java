@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
-    private ArrayList<String> arrayList;
+    private ArrayList<User> arrayList;
 
-    UserAdapter(ArrayList<String> arrayList) {
+    UserAdapter(ArrayList<User> arrayList) {
         this.arrayList = arrayList;
     }
 
@@ -26,7 +26,9 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, int position) {
-        holder.userName.setText(arrayList.get(position));
+        holder.firstName.setText(arrayList.get(position).getFirstName());
+        holder.lastName.setText(arrayList.get(position).getLastName());
+        holder.email.setText(arrayList.get(position).getEmailId());
     }
 
     @Override
@@ -35,11 +37,16 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView userName;
+        TextView firstName;
+        TextView lastName;
+        TextView email;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
-            userName = itemView.findViewById(R.id.user_name);
+            firstName = itemView.findViewById(R.id.first_name);
+            lastName = itemView.findViewById(R.id.last_name);
+            email = itemView.findViewById(R.id.email);
         }
     }
 }

@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "Main";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private ArrayList<String> arrayList;
+    private ArrayList<User> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
         arrayList = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
-            arrayList.add("Danial");
+            User user = new User("Shahid # " + i, "Ghafoor", "shahidghafoor00@gmail.com");
+            arrayList.add(user);
         }
 
         recyclerView = findViewById(R.id.recycler_view);
